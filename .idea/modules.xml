@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ZotkinaSandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/ZotkinaSandbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ZotkinaSandbox_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ZotkinaSandbox_main.iml" group="ZotkinaSandbox" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ZotkinaSandbox_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ZotkinaSandbox_test.iml" group="ZotkinaSandbox" />
+    </modules>
+  </component>
+</project>
