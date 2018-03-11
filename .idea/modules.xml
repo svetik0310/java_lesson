@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ZotkinaSandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/ZotkinaSandbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ZotkinaSandbox_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ZotkinaSandbox_main.iml" group="ZotkinaSandbox" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ZotkinaSandbox_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ZotkinaSandbox_test.iml" group="ZotkinaSandbox" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" group="addressbook-web-tests" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" group="addressbook-web-tests" />
     </modules>
   </component>
 </project>
