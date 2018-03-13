@@ -1,4 +1,4 @@
-package ru.zotkina.addressbook;
+package ru.zotkina.addressbook.model;
 
 public class ContactData {
     private final String firstname;
