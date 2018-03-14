@@ -35,4 +35,24 @@ public class ContractHelper extends HelperBase{
     public void initContactCreation() {
         click(By.linkText("add new"));
     }
+
+    public void selectContact() {
+        if (!wd.findElement(By.name("selected[]")).isSelected()) {
+            click(By.name("selected[]"));
+        }
+    }
+
+    public void deleteContract() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+        allertAccept();
+    }
+
+    public void editSelectedContract()
+    {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img"));
+    }
+
+    public void submitContractUpdate() {
+        click(By.name("update"));
+    }
 }

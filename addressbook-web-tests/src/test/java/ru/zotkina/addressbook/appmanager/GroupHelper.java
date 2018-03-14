@@ -28,6 +28,7 @@ public class GroupHelper extends HelperBase{
         fillTextForm(By.name("group_footer"),groupData.getFooter());
     }
 
+
     public void deleteSelectedGroups() {
         click(By.name("delete"));
     }
@@ -36,5 +37,12 @@ public class GroupHelper extends HelperBase{
         if (!wd.findElement(By.name("selected[]")).isSelected()) {
             click(By.name("selected[]"));
         }
+    }
+
+    public void editSelectedGroup() {
+        click(By.name("edit"));
+    }
+    public void updateSelectedGroup() {
+        click(By.name("update"));
     }
 }
