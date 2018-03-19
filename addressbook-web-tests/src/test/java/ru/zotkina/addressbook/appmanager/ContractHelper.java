@@ -1,12 +1,13 @@
 package ru.zotkina.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.zotkina.addressbook.model.ContactData;
 
 public class ContractHelper extends HelperBase{
 
-    public ContractHelper(FirefoxDriver wd) {
+    public ContractHelper(WebDriver wd) {
         super(wd);
     }
 
