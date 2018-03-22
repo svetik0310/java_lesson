@@ -3,7 +3,11 @@ package ru.zotkina.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.zotkina.addressbook.model.ContactData;
+
+import java.util.NoSuchElementException;
 
 public class ContractHelper extends HelperBase{
 
@@ -15,7 +19,7 @@ public class ContractHelper extends HelperBase{
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContractForm(ContactData contactData) {
+    public void fillContractForm(ContactData contactData, boolean creation) {
         fillTextForm(By.name("firstname"),contactData.getFirstname());
         fillTextForm(By.name("middlename"),contactData.getMiddlename());
         fillTextForm(By.name("lastname"),contactData.getLastname());
@@ -31,6 +35,13 @@ public class ContractHelper extends HelperBase{
         fillTextForm(By.name("email2"),contactData.getEmail2());
         fillTextForm(By.name("email3"),contactData.getEmail3());
         fillTextForm(By.name("homepage"),contactData.getHomepage());
+        if (creation)
+        {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else
+        {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void initContactCreation() {

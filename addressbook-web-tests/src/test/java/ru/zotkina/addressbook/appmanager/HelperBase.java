@@ -3,7 +3,7 @@ package ru.zotkina.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.NoSuchElementException;
 
 public class HelperBase {
 
@@ -19,8 +19,13 @@ public class HelperBase {
 
     protected void fillTextForm(By locator, String text) {
         click(locator);
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
+        if (text !=null) {
+            String existingText = wd.findElement(locator).getAttribute("value");
+            if (!text.equals(existingText)){
+                wd.findElement(locator).clear();
+                wd.findElement(locator).sendKeys(text);
+            }
+        }
     }
 
     protected  void allertAccept(){
@@ -31,6 +36,17 @@ public class HelperBase {
             wd.switchTo().alert();
             return true;
         } catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
+
+    public boolean isElementPresent(By locator) {
+        try
+        {
+            wd.findElement(By.name("new_group"));
+            return true;
+        } catch (NoSuchElementException e)
+        {
             return false;
         }
     }
