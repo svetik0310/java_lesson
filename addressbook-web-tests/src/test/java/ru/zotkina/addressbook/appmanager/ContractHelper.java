@@ -61,10 +61,20 @@ public class ContractHelper extends HelperBase{
 
     public void editSelectedContract()
     {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img"));
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 
     public void submitContractUpdate() {
         click(By.name("update"));
+    }
+
+    public boolean isContactExist() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createContact(ContactData contactData, boolean b) {
+        initContactCreation();
+        fillContractForm(new ContactData("Вася", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "test1A"), true);
+        submitContractCreation();
     }
 }

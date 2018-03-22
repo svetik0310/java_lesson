@@ -43,7 +43,7 @@ public class HelperBase {
     public boolean isElementPresent(By locator) {
         try
         {
-            wd.findElement(By.name("new_group"));
+            wd.findElement(locator);//By.name("new_group"))
             return true;
         } catch (NoSuchElementException e)
         {
