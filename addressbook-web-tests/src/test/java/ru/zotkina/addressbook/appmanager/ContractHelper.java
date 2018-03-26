@@ -48,10 +48,8 @@ public class ContractHelper extends HelperBase{
         click(By.linkText("add new"));
     }
 
-    public void selectContact() {
-        if (!wd.findElement(By.name("selected[]")).isSelected()) {
-            click(By.name("selected[]"));
-        }
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteContract() {
@@ -59,9 +57,10 @@ public class ContractHelper extends HelperBase{
         allertAccept();
     }
 
-    public void editSelectedContract()
+    public void editSelectedContract(int index)
     {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr["+index+"]/td[8]/a/img")).click();
+       // click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 
     public void submitContractUpdate() {

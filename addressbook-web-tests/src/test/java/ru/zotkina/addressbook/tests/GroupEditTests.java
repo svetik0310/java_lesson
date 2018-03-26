@@ -12,7 +12,7 @@ public class GroupEditTests extends TestBase{
         if(!app.getGroupHelper().isGroupExist()) {
             app.getGroupHelper().createGroup(new GroupData("test1A", "test2A", "test3A"));
         }
-        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().selectGroup(before-1);
         app.getGroupHelper().editSelectedGroup();
         app.getGroupHelper().fillGroupForm(new GroupData("testEdit", "test2A", "test3A"));
         app.getGroupHelper().updateSelectedGroup();
