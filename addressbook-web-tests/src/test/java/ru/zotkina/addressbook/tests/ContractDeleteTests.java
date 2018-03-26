@@ -1,5 +1,6 @@
 package ru.zotkina.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.ContactData;
 import ru.zotkina.addressbook.model.GroupData;
@@ -7,6 +8,8 @@ import ru.zotkina.addressbook.model.GroupData;
 public class ContractDeleteTests extends TestBase{
     @Test
     public void testContactDelete() {
+        app.getNavigationHelper().goToHomePage();
+        int before = app.getContractHelper().getContractCount();
         if(!app.getContractHelper().isContactExist()) {
             app.getNavigationHelper().gotoGroupPage();
             if(!app.getGroupHelper().isGroupExist()) {
@@ -18,5 +21,7 @@ public class ContractDeleteTests extends TestBase{
         app.getContractHelper().selectContact();
         app.getContractHelper().deleteContract();
         app.getNavigationHelper().goToHomePage();
+        int after = app.getContractHelper().getContractCount();
+        Assert.assertEquals(after,before-1);
     }
 }

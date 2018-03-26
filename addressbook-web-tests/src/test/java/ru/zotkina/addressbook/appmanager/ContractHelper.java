@@ -77,4 +77,8 @@ public class ContractHelper extends HelperBase{
         fillContractForm(new ContactData("Вася", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "test1A"), true);
         submitContractCreation();
     }
+
+    public int getContractCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
