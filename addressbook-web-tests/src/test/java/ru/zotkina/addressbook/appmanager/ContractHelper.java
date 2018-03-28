@@ -2,11 +2,14 @@ package ru.zotkina.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.zotkina.addressbook.model.ContactData;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ContractHelper extends HelperBase{
@@ -79,5 +82,21 @@ public class ContractHelper extends HelperBase{
 
     public int getContractCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<ContactData> getContractList() {
+        List<ContactData> contracts= new ArrayList<ContactData>();
+        List<WebElement> elements= wd.findElements(By.name("entry"));//(By.xpath(".//*[@id='maintable']/tbody/tr[2]/td[1]")//cssSelector("span.group"));
+        int index =2;
+        for(WebElement element: elements)
+        {
+            WebElement elementsTd= wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr["+index+"]/td[2]"));
+            String name= elementsTd.getText();
+            //String name=element.getText();
+            ContactData contract = new ContactData(name,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+            contracts.add(contract);
+            index++;
+        }
+        return  contracts;
     }
 }
