@@ -5,13 +5,14 @@ import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.ContactData;
 import ru.zotkina.addressbook.model.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ContractEditTests extends TestBase{
     @Test
     public void testContactUpdate() {
         app.getNavigationHelper().goToHomePage();
-        if(!app.getContractHelper().isContactExist()) {
+         if(!app.getContractHelper().isContactExist()) {
             app.getNavigationHelper().gotoGroupPage();
             if(!app.getGroupHelper().isGroupExist()) {
                 app.getGroupHelper().createGroup(new GroupData("test1A", "test2A", "test3A"));
@@ -20,11 +21,19 @@ public class ContractEditTests extends TestBase{
             app.getNavigationHelper().returnToHomePage();
         }
         List<ContactData> before=app.getContractHelper().getContractList();
+        ContactData contact = new ContactData(before.get(before.size()-1).getIdcontact(),"Василий2", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", null);
+
         app.getContractHelper().editSelectedContract(before.size()-1);
-        app.getContractHelper().fillContractForm(new ContactData("Василий", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", null), false);
+        app.getContractHelper().fillContractForm(contact, false);
         app.getContractHelper().submitContractUpdate();
         app.getNavigationHelper().returnToHomePage();
-        List<ContactData> after=app.getContractHelper().getContractList();
+        List<ContactData> after = app.getContractHelper().getContractList();
         Assert.assertEquals(after.size(),before.size());
+
+        before.remove(before.size()-1);
+        before.add(contact);
+        Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));
+        //Assert.assertEquals(act,exp);
+
     }
 }

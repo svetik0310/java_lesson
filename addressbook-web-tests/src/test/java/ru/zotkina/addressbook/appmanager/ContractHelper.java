@@ -62,8 +62,7 @@ public class ContractHelper extends HelperBase{
 
     public void editSelectedContract(int index)
     {
-        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr["+index+"]/td[8]/a/img")).click();
-       // click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        wd.findElements(By.name("entry")).get(index).findElement(By.xpath("./td[8]")).click();
     }
 
     public void submitContractUpdate() {
@@ -86,16 +85,21 @@ public class ContractHelper extends HelperBase{
 
     public List<ContactData> getContractList() {
         List<ContactData> contracts= new ArrayList<ContactData>();
-        List<WebElement> elements= wd.findElements(By.name("entry"));//(By.xpath(".//*[@id='maintable']/tbody/tr[2]/td[1]")//cssSelector("span.group"));
-        int index =2;
+        List<WebElement> elements= wd.findElements(By.name("entry"));
+
         for(WebElement element: elements)
         {
-            WebElement elementsTd= wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr["+index+"]/td[2]"));
-            String name= elementsTd.getText();
-            //String name=element.getText();
-            ContactData contract = new ContactData(name,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+            WebElement elementsTdid= element.findElement(By.xpath("./td[1]"));
+            String id = elementsTdid.findElement(By.tagName("input")).getAttribute("value");
+
+            WebElement elementsTd= element.findElement(By.xpath("./td[2]"));
+            String lastname= elementsTd.getText();
+
+            WebElement elementsTd1= element.findElement(By.xpath("./td[3]"));
+            String firstname= elementsTd1.getText();
+
+            ContactData contract = new ContactData(id, firstname,null,lastname,null,null,null,null,null,null,null,null,null,null,null,null,null);
             contracts.add(contract);
-            index++;
         }
         return  contracts;
     }

@@ -13,7 +13,7 @@ public class ContactCreationTests extends TestBase {
         app.getNavigationHelper().goToHomePage();
         List<ContactData> before=app.getContractHelper().getContractList();
         app.getContractHelper().initContactCreation();
-        app.getContractHelper().fillContractForm(new ContactData("Вася", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "test1A"), true);
+        app.getContractHelper().fillContractForm(new ContactData("Вася", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "test1E1"), true);
         app.getContractHelper().submitContractCreation();
         app.getNavigationHelper().returnToHomePage();
         List<ContactData> after=app.getContractHelper().getContractList();
