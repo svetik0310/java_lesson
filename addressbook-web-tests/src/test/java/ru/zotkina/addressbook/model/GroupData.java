@@ -53,7 +53,7 @@ public class GroupData {
         this.groupname = groupname;
         this.header = header;
         this.footer = footer;
-        this.idgroup=0;
+        this.idgroup=Integer.MAX_VALUE;
 
     }
 

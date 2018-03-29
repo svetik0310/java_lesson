@@ -41,7 +41,7 @@ public class ContactData {
         this.email3 = email3;
         this.homepage = homepage;
         this.group=group;
-        this.idcontact=0;
+        this.idcontact=Integer.MAX_VALUE;
     }
 
 
