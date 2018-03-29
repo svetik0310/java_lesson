@@ -22,12 +22,12 @@ public class ContactCreationTests extends TestBase {
         Assert.assertEquals(after.size(), before.size()+1);
 
 
-        int max=0;
+/*        int max=0;
         for(ContactData g:after)
         {
             if(g.getIdcontact()> max) max=g.getIdcontact();
-        }
-        contact.setIdcontact(max);
+        }*/
+        contact.setIdcontact(after.stream().max((o1,o2)-> Integer.compare(o1.getIdcontact(),o2.getIdcontact())).get().getIdcontact());
         before.add(contact);
         Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));
 
