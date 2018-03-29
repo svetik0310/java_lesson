@@ -4,7 +4,23 @@ public class GroupData {
     private final String groupname;
     private final String header;
     private final String footer;
-    private final String idgroup;
+    private  int idgroup;
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "groupname='" + groupname + '\'' +
+                ", idgroup=" + idgroup +
+                '}';
+    }
+
+    public int getIdgroup() {
+        return idgroup;
+    }
+
+    public void setIdgroup(int idgroup) {
+        this.idgroup = idgroup;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -13,30 +29,18 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
-        if (groupname != null ? !groupname.equals(groupData.groupname) : groupData.groupname != null) return false;
-        return idgroup != null ? idgroup.equals(groupData.idgroup) : groupData.idgroup == null;
+        if (idgroup != groupData.idgroup) return false;
+        return groupname != null ? groupname.equals(groupData.groupname) : groupData.groupname == null;
     }
 
     @Override
     public int hashCode() {
         int result = groupname != null ? groupname.hashCode() : 0;
-        result = 31 * result + (idgroup != null ? idgroup.hashCode() : 0);
+        result = 31 * result + idgroup;
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "groupname='" + groupname + '\'' +
-                ", idgroup='" + idgroup + '\'' +
-                '}';
-    }
-
-    public String getIdgroup() {
-        return idgroup;
-    }
-
-    public GroupData(String idgroup, String groupname, String header, String footer) {
+    public GroupData(int idgroup, String groupname, String header, String footer) {
         this.groupname = groupname;
         this.header = header;
         this.footer = footer;
@@ -49,7 +53,7 @@ public class GroupData {
         this.groupname = groupname;
         this.header = header;
         this.footer = footer;
-        this.idgroup=null;
+        this.idgroup=0;
 
     }
 

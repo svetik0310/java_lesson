@@ -16,8 +16,13 @@ public class ContactData {
     private final String email2;
     private final String email3;
     private final String homepage;
-    private final String idcontact;
+    private int  idcontact;
     private String group;
+
+
+    public void setIdcontact(int idcontact) {
+        this.idcontact = idcontact;
+    }
 
     public ContactData(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String home, String mobile, String work, String fax, String email, String email2, String email3, String homepage, String group) {
         this.firstname = firstname;
@@ -36,7 +41,12 @@ public class ContactData {
         this.email3 = email3;
         this.homepage = homepage;
         this.group=group;
-        this.idcontact=null;
+        this.idcontact=0;
+    }
+
+
+    public int getIdcontact() {
+        return idcontact;
     }
 
     @Override
@@ -46,16 +56,16 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
+        if (idcontact != that.idcontact) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-        return idcontact != null ? idcontact.equals(that.idcontact) : that.idcontact == null;
+        return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
     }
 
     @Override
     public int hashCode() {
         int result = firstname != null ? firstname.hashCode() : 0;
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + (idcontact != null ? idcontact.hashCode() : 0);
+        result = 31 * result + idcontact;
         return result;
     }
 
@@ -64,15 +74,11 @@ public class ContactData {
         return "ContactData{" +
                 "firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", idcontact='" + idcontact + '\'' +
+                ", idcontact=" + idcontact +
                 '}';
     }
 
-    public String getIdcontact() {
-        return idcontact;
-    }
-
-    public ContactData(String id, String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String home, String mobile, String work, String fax, String email, String email2, String email3, String homepage, String group) {
+    public ContactData(int id, String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String home, String mobile, String work, String fax, String email, String email2, String email3, String homepage, String group) {
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;

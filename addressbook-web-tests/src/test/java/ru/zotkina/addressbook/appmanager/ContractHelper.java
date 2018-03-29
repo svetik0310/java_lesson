@@ -75,7 +75,7 @@ public class ContractHelper extends HelperBase{
 
     public void createContact(ContactData contactData, boolean b) {
         initContactCreation();
-        fillContractForm(new ContactData("Вася", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "test1A"), true);
+        fillContractForm(contactData, true);
         submitContractCreation();
     }
 
@@ -90,7 +90,7 @@ public class ContractHelper extends HelperBase{
         for(WebElement element: elements)
         {
             WebElement elementsTdid= element.findElement(By.xpath("./td[1]"));
-            String id = elementsTdid.findElement(By.tagName("input")).getAttribute("value");
+            int id = Integer.parseInt(elementsTdid.findElement(By.tagName("input")).getAttribute("value"));
 
             WebElement elementsTd= element.findElement(By.xpath("./td[2]"));
             String lastname= elementsTd.getText();
