@@ -1,6 +1,7 @@
 package ru.zotkina.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.GroupData;
 
@@ -8,12 +9,16 @@ import java.util.List;
 
 public class GroupDeleteTests extends TestBase{
 
-    @Test
-    public void testGroupDeleteTests() {
+    @BeforeMethod
+    public void preconditions(){
         app.getNavigationHelper().gotoGroupPage();
         if(!app.getGroupHelper().isGroupExist()) {
-            app.getGroupHelper().createGroup(new GroupData("test1A", "test2A", "test3A"));
+            app.getGroupHelper().createGroup(new GroupData("test1A6", "test2A", "test3A"));
         }
+    }
+
+    @Test
+    public void testGroupDeleteTests() {
         List<GroupData> before=app.getGroupHelper().getGroupList();
         app.getGroupHelper().selectGroup(0);
         app.getGroupHelper().deleteSelectedGroups();

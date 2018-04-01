@@ -33,6 +33,13 @@ public class GroupHelper extends HelperBase{
         fillTextForm(By.name("group_footer"),groupData.getFooter());
     }
 
+    public void editGroup(int index, GroupData group) {
+        selectGroup(index);
+        editSelectedGroup();
+        fillGroupForm(group);
+        updateSelectedGroup();
+        returnToGroupPage();
+    }
 
     public void deleteSelectedGroups() {
         click(By.name("delete"));

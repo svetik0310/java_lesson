@@ -47,6 +47,12 @@ public class ContractHelper extends HelperBase{
         }
     }
 
+    private void editContract(ContactData contact, int index) {
+        editSelectedContract(index);
+        fillContractForm(contact, false);
+        submitContractUpdate();
+    }
+
     public void initContactCreation() {
         click(By.linkText("add new"));
     }
