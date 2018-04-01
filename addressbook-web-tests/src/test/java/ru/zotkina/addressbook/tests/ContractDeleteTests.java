@@ -8,7 +8,7 @@ import ru.zotkina.addressbook.model.GroupData;
 import java.util.List;
 
 public class ContractDeleteTests extends TestBase{
-    @Test ( enabled=false)
+    @Test
     public void testContactDelete() {
         app.getNavigationHelper().goToHomePage();
         if(!app.getContractHelper().isContactExist()) {

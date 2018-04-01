@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class ContractEditTests extends TestBase{
-    @Test ( enabled=false)
+    @Test
     public void testContactUpdate() {
         app.getNavigationHelper().goToHomePage();
          if(!app.getContractHelper().isContactExist()) {
