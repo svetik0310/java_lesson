@@ -25,10 +25,11 @@ public class GroupEditTests extends TestBase{
         List<GroupData> after=app.getGroupHelper().getGroupList();
         Assert.assertEquals(after.size(), before.size());
 
-        //сравнение множеств
+
         before.remove(before.size()-1);
         before.add(group);
-        Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));
+        //сравнение множеств
+        /*Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));*/
 
         //сравнение списков
         Comparator<? super GroupData> byId = (g1,g2)-> Integer.compare(g1.getIdgroup(),g2.getIdgroup());
