@@ -6,12 +6,13 @@ import ru.zotkina.addressbook.model.ContactData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
     @Test
     public void testContactCreation() {
         app.goTo().homePage();
-        List<ContactData> before=app.contract().list();
+        Set<ContactData> before=app.contract().all();
         ContactData contact =new ContactData().withFirstname("Вася").withMiddlename("Иванович").withLastname("Пупкин")
                 .withNickname("Vasya").withTitle("title").withCompany("company")
                 .withAddress("address").withHome("222").withMobile("333")
@@ -20,25 +21,12 @@ public class ContactCreationTests extends TestBase {
                 .withHomepage("343543545").withGroup("1");
         app.contract().create(contact);
         app.goTo().returnToHomePage();
-        List<ContactData> after=app.contract().list();
+        Set<ContactData> after=app.contract().all();
         Assert.assertEquals(after.size(), before.size()+1);
 
-
-/*        int max=0;
-        for(ContactData g:after)
-        {
-            if(g.getIdcontact()> max) max=g.getIdcontact();
-        }*/
+        contact.withIdcontact(after.stream().mapToInt((g)->g.getIdcontact()).max().getAsInt());
         before.add(contact);
 
-/*//Проверка множеств
-        contact.setIdcontact(after.stream().max((o1,o2)-> Integer.compare(o1.getIdcontact(),o2.getIdcontact())).get().getIdcontact());
-        Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));*/
-
-        //проверка списков, предыдущее можно удалить
-        Comparator<? super ContactData> byId = (g1, g2)-> Integer.compare(g1.getIdcontact(),g2.getIdcontact());
-        before.sort(byId);
-        after.sort(byId);
         Assert.assertEquals(before,after);
     }
 }

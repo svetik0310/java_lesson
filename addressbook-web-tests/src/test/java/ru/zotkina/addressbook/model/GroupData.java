@@ -46,12 +46,15 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
+        if (idgroup != groupData.idgroup) return false;
         return groupname != null ? groupname.equals(groupData.groupname) : groupData.groupname == null;
     }
 
     @Override
     public int hashCode() {
-        return groupname != null ? groupname.hashCode() : 0;
+        int result = groupname != null ? groupname.hashCode() : 0;
+        result = 31 * result + idgroup;
+        return result;
     }
 
     public String getGroupname() {

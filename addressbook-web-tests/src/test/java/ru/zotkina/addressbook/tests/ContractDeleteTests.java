@@ -6,15 +6,15 @@ import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.ContactData;
 import ru.zotkina.addressbook.model.GroupData;
 
-import java.util.List;
+import java.util.Set;
 
 public class ContractDeleteTests extends TestBase{
     @BeforeMethod
     public void preconditions(){
         app.goTo().homePage();
-        if(app.contract().list().size()==0) {
+        if(app.contract().all().size()==0) {
             app.goTo().groupPage();
-            if(app.group().list().size()==0) {
+            if(app.group().all().size()==0) {
                 app.group().create(new GroupData().withGroupname("test1A").withHeader("test2A").withFooter("test3A"));
             }
             app.contract().create(new ContactData().withFirstname("Василий")
@@ -29,14 +29,14 @@ public class ContractDeleteTests extends TestBase{
 
     @Test
     public void testContactDelete() {
-        List<ContactData> before=app.contract().list();
-        int index=0;
-        app.contract().delete(index);
+        Set<ContactData> before=app.contract().all();
+        ContactData deleteContact=before.iterator().next();
+        app.contract().delete(deleteContact);
         app.goTo().homePage();
-        List<ContactData> after=app.contract().list();
+        Set<ContactData> after=app.contract().all();
         Assert.assertEquals(after.size(),before.size()-1);
 
-        before.remove(index);
+        before.remove(deleteContact);
         Assert.assertEquals(before,after);
     }
 

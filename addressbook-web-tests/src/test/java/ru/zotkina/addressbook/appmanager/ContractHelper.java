@@ -8,9 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.zotkina.addressbook.model.ContactData;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class ContractHelper extends HelperBase{
 
@@ -47,15 +45,24 @@ public class ContractHelper extends HelperBase{
         }
     }
 
-    public void edit(ContactData contact, int index) {
-        editSelectedContract(index);
+    public void edit(ContactData contact) {
+        editSelectedContractById(contact.getIdcontact());
         fillContractForm(contact, false);
         submitContractUpdate();
     }
 
-    public void delete(int index) {
-        selectContact(index);
+    private void editSelectedContractById(int idcontact) {
+        wd.findElement(By.xpath("//input[@id='"+idcontact+"']/../../td[8]")).click();
+        //input[@id='44']/../../td[8]
+    }
+
+    public void delete(ContactData contact) {
+        selectContactById(contact.getIdcontact());
         deleteContract();
+    }
+
+    private void selectContactById(int idcontact) {
+        wd.findElement(By.cssSelector("input[id='"+idcontact+"']")).click();
     }
 
     public void create(ContactData contact) {
@@ -120,4 +127,27 @@ public class ContractHelper extends HelperBase{
         }
         return  contracts;
     }
+
+    public Set<ContactData> all() {
+        Set<ContactData> contracts= new HashSet<ContactData>();
+        List<WebElement> elements= wd.findElements(By.name("entry"));
+
+        for(WebElement element: elements)
+        {
+            WebElement elementsTdid= element.findElement(By.xpath("./td[1]"));
+            int id = Integer.parseInt(elementsTdid.findElement(By.tagName("input")).getAttribute("value"));
+
+            WebElement elementsTd= element.findElement(By.xpath("./td[2]"));
+            String lastname= elementsTd.getText();
+
+            WebElement elementsTd1= element.findElement(By.xpath("./td[3]"));
+            String firstname= elementsTd1.getText();
+
+            ContactData contract = new ContactData().withIdcontact(id).withFirstname(firstname).withLastname(lastname);
+            contracts.add(contract);
+        }
+        return  contracts;
+    }
+
+    ////table[@id='maintable']/
 }
