@@ -1,10 +1,10 @@
 package ru.zotkina.addressbook.model;
 
 public class GroupData {
-    private final String groupname;
-    private final String header;
-    private final String footer;
-    private  int idgroup;
+    private  String groupname;
+    private  String header;
+    private  String footer;
+    private  int idgroup=Integer.MAX_VALUE;;
 
     @Override
     public String toString() {
@@ -18,8 +18,25 @@ public class GroupData {
         return idgroup;
     }
 
-    public void setIdgroup(int idgroup) {
+    public GroupData withIdgroup(int idgroup) {
         this.idgroup = idgroup;
+        return this;
+    }
+
+    public GroupData withGroupname(String groupname) {
+        this.groupname = groupname;
+        return this;
+    }
+
+    public GroupData withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupData withFooter(String footer) {
+
+        this.footer = footer;
+        return this;
     }
 
     @Override
@@ -35,23 +52,6 @@ public class GroupData {
     @Override
     public int hashCode() {
         return groupname != null ? groupname.hashCode() : 0;
-    }
-
-    public GroupData(int idgroup, String groupname, String header, String footer) {
-        this.groupname = groupname;
-        this.header = header;
-        this.footer = footer;
-        this.idgroup=idgroup;
-
-    }
-
-
-    public GroupData(String groupname, String header, String footer) {
-        this.groupname = groupname;
-        this.header = header;
-        this.footer = footer;
-        this.idgroup=Integer.MAX_VALUE;
-
     }
 
     public String getGroupname() {

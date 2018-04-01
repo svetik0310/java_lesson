@@ -115,7 +115,7 @@ public class ContractHelper extends HelperBase{
             WebElement elementsTd1= element.findElement(By.xpath("./td[3]"));
             String firstname= elementsTd1.getText();
 
-            ContactData contract = new ContactData(id, firstname,null,lastname,null,null,null,null,null,null,null,null,null,null,null,null,null);
+            ContactData contract = new ContactData().withIdcontact(id).withFirstname(firstname).withLastname(lastname);
             contracts.add(contract);
         }
         return  contracts;

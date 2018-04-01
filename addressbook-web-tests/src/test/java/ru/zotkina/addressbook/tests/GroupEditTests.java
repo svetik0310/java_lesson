@@ -15,7 +15,7 @@ public class GroupEditTests extends TestBase{
     public void preconditions(){
         app.goTo().groupPage();
         if(app.group().list().size()==0) {
-            app.group().create(new GroupData("test1A6", "test2A", "test3A"));
+            app.group().create(new GroupData().withGroupname("test1A6").withFooter("test2A").withHeader("test3A"));
         }
     }
 
@@ -23,7 +23,8 @@ public class GroupEditTests extends TestBase{
     public void testGroupEditName() {
         List<GroupData> before=app.group().list();
         int index=before.size()-1;
-        GroupData group = new GroupData(before.get(index).getIdgroup(),"testEdit", "test2A", "test3A");
+        GroupData group = new GroupData()
+                .withIdgroup(before.get(index).getIdgroup()).withGroupname("testEdit").withHeader("test2A").withFooter("test3A");
         app.group().edit(index, group);
         List<GroupData> after=app.group().list();
         Assert.assertEquals(after.size(), before.size());

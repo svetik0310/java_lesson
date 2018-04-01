@@ -15,9 +15,14 @@ public class ContractDeleteTests extends TestBase{
         if(app.contract().list().size()==0) {
             app.goTo().groupPage();
             if(app.group().list().size()==0) {
-                app.group().create(new GroupData("test1A", "test2A", "test3A"));
+                app.group().create(new GroupData().withGroupname("test1A").withHeader("test2A").withFooter("test3A"));
             }
-            app.contract().create(new ContactData("Василий", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "test1A"), false);
+            app.contract().create(new ContactData().withFirstname("Василий")
+                    .withMiddlename("Иванович").withLastname("Пупкин")
+                    .withNickname("Vasya").withTitle("title").withCompany("company")
+                    .withAddress("address").withEmail("222").withEmail2("333").withEmail3("444")
+                    .withFax("555").withWork("3445").withHomepage("432434").withHome("2423424")
+                    .withMobile("343543545").withGroup("test1A"), false);
             app.goTo().returnToHomePage();
         }
     }
