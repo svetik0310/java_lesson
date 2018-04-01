@@ -1,25 +1,21 @@
 package ru.zotkina.addressbook.tests;
 
-import org.apache.http.annotation.Contract;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.ContactData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase {
     @Test
     public void testContactCreation() {
-        app.getNavigationHelper().goToHomePage();
-        List<ContactData> before=app.getContractHelper().getContractList();
+        app.goTo().homePage();
+        List<ContactData> before=app.contract().list();
         ContactData contact =new ContactData("Вася", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "1");
-        app.getContractHelper().initContactCreation();
-        app.getContractHelper().fillContractForm(contact, true);
-        app.getContractHelper().submitContractCreation();
-        app.getNavigationHelper().returnToHomePage();
-        List<ContactData> after=app.getContractHelper().getContractList();
+        app.contract().create(contact);
+        app.goTo().returnToHomePage();
+        List<ContactData> after=app.contract().list();
         Assert.assertEquals(after.size(), before.size()+1);
 
 

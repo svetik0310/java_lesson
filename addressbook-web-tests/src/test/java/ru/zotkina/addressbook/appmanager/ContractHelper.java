@@ -47,10 +47,21 @@ public class ContractHelper extends HelperBase{
         }
     }
 
-    private void editContract(ContactData contact, int index) {
+    public void edit(ContactData contact, int index) {
         editSelectedContract(index);
         fillContractForm(contact, false);
         submitContractUpdate();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        deleteContract();
+    }
+
+    public void create(ContactData contact) {
+        initContactCreation();
+        fillContractForm(contact, true);
+        submitContractCreation();
     }
 
     public void initContactCreation() {
@@ -79,7 +90,7 @@ public class ContractHelper extends HelperBase{
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createContact(ContactData contactData, boolean b) {
+    public void create(ContactData contactData, boolean b) {
         initContactCreation();
         fillContractForm(contactData, true);
         submitContractCreation();
@@ -89,7 +100,7 @@ public class ContractHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContractList() {
+    public List<ContactData> list() {
         List<ContactData> contracts= new ArrayList<ContactData>();
         List<WebElement> elements= wd.findElements(By.name("entry"));
 

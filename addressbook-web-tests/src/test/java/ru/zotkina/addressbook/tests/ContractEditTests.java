@@ -7,30 +7,29 @@ import ru.zotkina.addressbook.model.ContactData;
 import ru.zotkina.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContractEditTests extends TestBase{
     @BeforeMethod
     public void preconditions(){
-        app.getNavigationHelper().goToHomePage();
-        if(!app.getContractHelper().isContactExist()) {
-            app.getNavigationHelper().gotoGroupPage();
-            if(!app.getGroupHelper().isGroupExist()) {
-                app.getGroupHelper().createGroup(new GroupData("test1A", "test2A", "test3A"));
+        app.goTo().homePage();
+        if(app.contract().list().size()==0) {
+            app.goTo().groupPage();
+            if(app.group().list().size()==0) {
+                app.group().create(new GroupData("test1A", "test2A", "test3A"));
             }
-            app.getContractHelper().createContact(new ContactData("Василий", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "test1A"), false);
-            app.getNavigationHelper().returnToHomePage();
+            app.contract().create(new ContactData("Василий", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", "test1A"), false);
+            app.goTo().returnToHomePage();
         }
     }
     @Test
     public void testContactUpdate() {
-        List<ContactData> before=app.getContractHelper().getContractList();
+        List<ContactData> before=app.contract().list();
         ContactData contact = new ContactData(before.get(before.size()-1).getIdcontact(),"Василий2", "Иванович", "Пупкин", "Vasya", "title", "company", "address", "222", "333", "444", "555", "3445", "432434", "2423424", "343543545", null);
         int index=before.size()-1;
-        editContract(contact, index);
-        app.getNavigationHelper().returnToHomePage();
-        List<ContactData> after = app.getContractHelper().getContractList();
+        app.contract().edit(contact, index);
+        app.goTo().returnToHomePage();
+        List<ContactData> after = app.contract().list();
         Assert.assertEquals(after.size(),before.size());
 
 
@@ -45,12 +44,5 @@ public class ContractEditTests extends TestBase{
         after.sort(byId);
         Assert.assertEquals(before,after);
 
-    }
-
-    private void editContract(ContactData contact, int index) {
-        app.getContractHelper().editSelectedContract(index);
-        app.getContractHelper().fillContractForm(contact, false);
-        app.getContractHelper().submitContractUpdate();
-        app.getNavigationHelper().returnToHomePage();
     }
 }
