@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.zotkina.addressbook.model.ContactData;
+import ru.zotkina.addressbook.model.Contacts;
 
 import java.util.*;
 
@@ -53,7 +54,6 @@ public class ContractHelper extends HelperBase{
 
     private void editSelectedContractById(int idcontact) {
         wd.findElement(By.xpath("//input[@id='"+idcontact+"']/../../td[8]")).click();
-        //input[@id='44']/../../td[8]
     }
 
     public void delete(ContactData contact) {
@@ -128,8 +128,8 @@ public class ContractHelper extends HelperBase{
         return  contracts;
     }
 
-    public Set<ContactData> all() {
-        Set<ContactData> contracts= new HashSet<ContactData>();
+    public Contacts all() {
+        Contacts contracts= new Contacts();
         List<WebElement> elements= wd.findElements(By.name("entry"));
 
         for(WebElement element: elements)
@@ -148,6 +148,4 @@ public class ContractHelper extends HelperBase{
         }
         return  contracts;
     }
-
-    ////table[@id='maintable']/
 }

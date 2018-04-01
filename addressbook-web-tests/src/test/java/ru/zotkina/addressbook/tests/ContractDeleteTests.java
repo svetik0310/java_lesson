@@ -4,9 +4,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.ContactData;
+import ru.zotkina.addressbook.model.Contacts;
 import ru.zotkina.addressbook.model.GroupData;
-
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.junit.MatcherAssert.*;
+import static org.testng.Assert.assertEquals;
 
 public class ContractDeleteTests extends TestBase{
     @BeforeMethod
@@ -29,15 +31,15 @@ public class ContractDeleteTests extends TestBase{
 
     @Test
     public void testContactDelete() {
-        Set<ContactData> before=app.contract().all();
+        Contacts before=app.contract().all();
         ContactData deleteContact=before.iterator().next();
         app.contract().delete(deleteContact);
         app.goTo().homePage();
-        Set<ContactData> after=app.contract().all();
+        Contacts after=app.contract().all();
         Assert.assertEquals(after.size(),before.size()-1);
 
-        before.remove(deleteContact);
-        Assert.assertEquals(before,after);
+        assertEquals(after.size(), before.size() - 1);
+        assertThat(after,equalTo(before.withOut(deleteContact)));
     }
 
 }

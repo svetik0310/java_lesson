@@ -1,11 +1,12 @@
 package ru.zotkina.addressbook.tests;
-
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.GroupData;
+import ru.zotkina.addressbook.model.Groups;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.junit.MatcherAssert.*;
+import static org.testng.Assert.assertEquals;
 
 
 public class GroupEditTests extends TestBase{
@@ -20,19 +21,15 @@ public class GroupEditTests extends TestBase{
 
     @Test
     public void testGroupEditName() {
-        Set<GroupData> before=app.group().all();
-        GroupData editgroup=before.iterator().next();
+        Groups before=app.group().all();
+        GroupData editGroup=before.iterator().next();
         GroupData group = new GroupData()
-                .withIdgroup(editgroup.getIdgroup()).withGroupname("testEdit").withHeader("test2A").withFooter("test3A");
+                .withIdgroup(editGroup.getIdgroup()).withGroupname("testEdit").withHeader("test2A").withFooter("test3A");
         app.group().edit(group);
-        Set<GroupData> after=app.group().all();
-        Assert.assertEquals(after.size(), before.size());
+        Groups after=app.group().all();
+        assertEquals(after.size(), before.size());
 
-
-        before.remove(editgroup);
-        before.add(group);
-
-        Assert.assertEquals(before,after);
+        assertThat(after,equalTo(before.withOut(editGroup).withAdded(group)));
 }
 
 }

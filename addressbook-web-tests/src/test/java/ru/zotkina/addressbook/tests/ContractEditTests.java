@@ -1,12 +1,14 @@
 package ru.zotkina.addressbook.tests;
 
-import org.testng.Assert;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.ContactData;
+import ru.zotkina.addressbook.model.Contacts;
 import ru.zotkina.addressbook.model.GroupData;
-
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.junit.MatcherAssert.*;
+import static org.testng.Assert.assertEquals;
 
 public class ContractEditTests extends TestBase{
     @BeforeMethod
@@ -26,7 +28,7 @@ public class ContractEditTests extends TestBase{
     }
     @Test
     public void testContactUpdate() {
-        Set<ContactData> before=app.contract().all();
+        Contacts before=app.contract().all();
         ContactData editContact=before.iterator().next();
         ContactData contact = new ContactData().withIdcontact(editContact.getIdcontact())
                 .withFirstname("Василий2").withMiddlename("Иванович").withLastname("Пупкин")
@@ -37,14 +39,10 @@ public class ContractEditTests extends TestBase{
 
         app.contract().edit(contact);
         app.goTo().returnToHomePage();
-        Set<ContactData> after = app.contract().all();
-        Assert.assertEquals(after.size(),before.size());
+        Contacts after = app.contract().all();
+        assertEquals(after.size(), before.size());
 
-        //editContact.withIdcontact(after.stream().mapToInt((g)->g.getIdcontact()).max().getAsInt());
-        before.remove(editContact);
-        before.add(contact);
-
-        Assert.assertEquals(before,after);
+        assertThat(after,equalTo(before.withOut(editContact).withAdded(contact)));
 
     }
 }
