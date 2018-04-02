@@ -49,6 +49,7 @@ public class ContractHelper extends HelperBase{
     public void edit(ContactData contact) {
         editSelectedContractById(contact.getIdcontact());
         fillContractForm(contact, false);
+        contractCash=null;
         submitContractUpdate();
     }
 
@@ -59,6 +60,7 @@ public class ContractHelper extends HelperBase{
     public void delete(ContactData contact) {
         selectContactById(contact.getIdcontact());
         deleteContract();
+        contractCash=null;
     }
 
     private void selectContactById(int idcontact) {
@@ -69,6 +71,7 @@ public class ContractHelper extends HelperBase{
         initContactCreation();
         fillContractForm(contact, true);
         submitContractCreation();
+        contractCash=null;
     }
 
     public void initContactCreation() {
@@ -128,8 +131,13 @@ public class ContractHelper extends HelperBase{
         return  contracts;
     }
 
+    private Contacts contractCash=null;
+
     public Contacts all() {
-        Contacts contracts= new Contacts();
+        if(contractCash!=null){
+            return new Contacts(contractCash);
+        }
+        contractCash= new Contacts();
         List<WebElement> elements= wd.findElements(By.name("entry"));
 
         for(WebElement element: elements)
@@ -144,8 +152,8 @@ public class ContractHelper extends HelperBase{
             String firstname= elementsTd1.getText();
 
             ContactData contract = new ContactData().withIdcontact(id).withFirstname(firstname).withLastname(lastname);
-            contracts.add(contract);
+            contractCash.add(contract);
         }
-        return  contracts;
+        return new Contacts(contractCash);
     }
 }
