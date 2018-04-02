@@ -39,8 +39,8 @@ public class ContractEditTests extends TestBase{
 
         app.contract().edit(contact);
         app.goTo().returnToHomePage();
+        assertThat(app.contract().count(),equalTo(before.size()));
         Contacts after = app.contract().all();
-        assertEquals(after.size(), before.size());
 
         assertThat(after,equalTo(before.withOut(editContact).withAdded(contact)));
 

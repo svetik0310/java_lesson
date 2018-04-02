@@ -35,10 +35,9 @@ public class ContractDeleteTests extends TestBase{
         ContactData deleteContact=before.iterator().next();
         app.contract().delete(deleteContact);
         app.goTo().homePage();
+        assertThat(app.contract().count(),equalTo(before.size()-1));
         Contacts after=app.contract().all();
-        Assert.assertEquals(after.size(),before.size()-1);
 
-        assertEquals(after.size(), before.size() - 1);
         assertThat(after,equalTo(before.withOut(deleteContact)));
     }
 
