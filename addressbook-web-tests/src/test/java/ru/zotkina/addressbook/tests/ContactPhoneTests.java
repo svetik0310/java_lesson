@@ -1,15 +1,15 @@
 package ru.zotkina.addressbook.tests;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.ContactData;
 import ru.zotkina.addressbook.model.Contacts;
 import ru.zotkina.addressbook.model.GroupData;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.junit.MatcherAssert.*;
-import static org.testng.Assert.assertEquals;
 
-public class ContractDeleteTests extends TestBase{
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.junit.MatcherAssert.assertThat;
+
+public class ContactPhoneTests extends TestBase{
+
     @BeforeMethod
     public void preconditions(){
         app.goTo().homePage();
@@ -29,15 +29,19 @@ public class ContractDeleteTests extends TestBase{
     }
 
     @Test
-    public void testContactDelete() {
-        Contacts before=app.contract().all();
-        ContactData deleteContact=before.iterator().next();
-        app.contract().delete(deleteContact);
-        app.goTo().homePage();
-        assertThat(app.contract().count(),equalTo(before.size()-1));
-        Contacts after=app.contract().all();
+    public void testContactPhones(){
 
-        assertThat(after,equalTo(before.withOut(deleteContact)));
+        app.goTo().homePage();
+        ContactData contact=app.contract().all().iterator().next();
+        ContactData contactInfoFromEditData = app.contract().infoFromEditForm(contact);
+        assertThat(contact.getHome(),equalTo(cleaned(contactInfoFromEditData.getHome())));
+        assertThat(contact.getWork(),equalTo(cleaned(contactInfoFromEditData.getWork())));
+        assertThat(contact.getMobile(),equalTo(cleaned(contactInfoFromEditData.getMobile())));
+
     }
 
+    public String cleaned(String phone)
+    {
+        return phone.replaceAll("\\s","").replaceAll("[-()]","");
+    }
 }

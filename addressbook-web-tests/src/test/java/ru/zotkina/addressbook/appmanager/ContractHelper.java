@@ -110,26 +110,6 @@ public class ContractHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contracts= new ArrayList<ContactData>();
-        List<WebElement> elements= wd.findElements(By.name("entry"));
-
-        for(WebElement element: elements)
-        {
-            WebElement elementsTdid= element.findElement(By.xpath("./td[1]"));
-            int id = Integer.parseInt(elementsTdid.findElement(By.tagName("input")).getAttribute("value"));
-
-            WebElement elementsTd= element.findElement(By.xpath("./td[2]"));
-            String lastname= elementsTd.getText();
-
-            WebElement elementsTd1= element.findElement(By.xpath("./td[3]"));
-            String firstname= elementsTd1.getText();
-
-            ContactData contract = new ContactData().withIdcontact(id).withFirstname(firstname).withLastname(lastname);
-            contracts.add(contract);
-        }
-        return  contracts;
-    }
 
     private Contacts contractCash=null;
 
@@ -140,9 +120,9 @@ public class ContractHelper extends HelperBase{
         contractCash= new Contacts();
         List<WebElement> elements= wd.findElements(By.name("entry"));
 
-        for(WebElement element: elements)
+       for(WebElement element: elements)
         {
-            WebElement elementsTdid= element.findElement(By.xpath("./td[1]"));
+           /* WebElement elementsTdid= element.findElement(By.xpath("./td[1]"));
             int id = Integer.parseInt(elementsTdid.findElement(By.tagName("input")).getAttribute("value"));
 
             WebElement elementsTd= element.findElement(By.xpath("./td[2]"));
@@ -152,8 +132,29 @@ public class ContractHelper extends HelperBase{
             String firstname= elementsTd1.getText();
 
             ContactData contract = new ContactData().withIdcontact(id).withFirstname(firstname).withLastname(lastname);
-            contractCash.add(contract);
+            contractCash.add(contract);*/
+           List<WebElement> cells = element.findElements(By.tagName("td"));
+           int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+           String lastname=cells.get(1).getText();
+           String firstname = cells.get(2).getText();
+           String[] phones = cells.get(5).getText().split("\n");
+           contractCash.add(new ContactData().withLastname(lastname).withFirstname(firstname).withIdcontact(id)
+           .withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
+
         }
         return new Contacts(contractCash);
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        editSelectedContractById(contact.getIdcontact());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData()
+                .withFirstname(firstname).withLastname(lastname).withMobile(mobile)
+                .withWork(work).withHome(home).withIdcontact(contact.getIdcontact());
     }
 }
