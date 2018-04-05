@@ -137,9 +137,11 @@ public class ContractHelper extends HelperBase{
            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
            String lastname=cells.get(1).getText();
            String firstname = cells.get(2).getText();
-           String[] phones = cells.get(5).getText().split("\n");
+           String allPhones = cells.get(5).getText();
+            String allEmails = cells.get(4).getText();
+            String allAddress = cells.get(3).getText();
            contractCash.add(new ContactData().withLastname(lastname).withFirstname(firstname).withIdcontact(id)
-           .withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
+           .withAllPhones(allPhones).withAllEmails(allEmails).withAllAddress(allAddress));//.withMobile(phones[1]).withWork(phones[2]));
 
         }
         return new Contacts(contractCash);
@@ -152,9 +154,14 @@ public class ContractHelper extends HelperBase{
         String work = wd.findElement(By.name("work")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
         wd.navigate().back();
         return new ContactData()
                 .withFirstname(firstname).withLastname(lastname).withMobile(mobile)
-                .withWork(work).withHome(home).withIdcontact(contact.getIdcontact());
+                .withWork(work).withHome(home).withIdcontact(contact.getIdcontact())
+                .withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
     }
 }

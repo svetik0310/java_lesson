@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
-public class ContactPhoneTests extends TestBase{
-
+public class ContactAddressTests extends TestBase {
     @BeforeMethod
     public void preconditions(){
         app.goTo().homePage();
@@ -32,25 +31,18 @@ public class ContactPhoneTests extends TestBase{
     }
 
     @Test
-    public void testContactPhones(){
+    public void testContactAddress(){
 
         app.goTo().homePage();
         ContactData contact=app.contract().all().iterator().next();
         ContactData contactInfoFromEditData = app.contract().infoFromEditForm(contact);
 
-        assertThat(contact.getAllPhones(),equalTo(merdgePhones(contactInfoFromEditData)));
+        assertThat(contact.getAllAddress(),equalTo(cleaned(contactInfoFromEditData.getAddress())));
     }
 
-    private String merdgePhones(ContactData contact) {
-
-        return Arrays.asList(contact.getHome(),contact.getMobile(),contact.getWork())
-                .stream().filter((s)->!s.equals(""))
-                .map(ContactPhoneTests::cleaned)
-                .collect(Collectors.joining("\n"));
-    }
-
-    public static String cleaned(String phone)
+    public  String cleaned(String address)
     {
-        return phone.replaceAll("\\s","").replaceAll("[-()]","");
+        return address.replaceAll(" ","");
     }
+
 }

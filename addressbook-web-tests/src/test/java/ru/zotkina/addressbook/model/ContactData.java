@@ -17,6 +17,9 @@ public class ContactData {
     private  String email3;
     private  String homepage;
     private int  idcontact=Integer.MAX_VALUE;
+    private String allPhones;
+    private String allEmails;
+    private String allAddress;
 
     @Override
     public boolean equals(Object o) {
@@ -78,6 +81,33 @@ public class ContactData {
         return this;
     }
 
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    public String getAllAddress() {
+        return allAddress;
+    }
+
+    public ContactData withAllAddress(String allAddress) {
+        this.allAddress = allAddress;
+        return this;
+    }
+
     public ContactData withWork(String work) {
 
         this.work = work;
@@ -130,6 +160,8 @@ public class ContactData {
         this.firstname = firstname;
         return this;
     }
+
+
 
 
     public int getIdcontact() {
