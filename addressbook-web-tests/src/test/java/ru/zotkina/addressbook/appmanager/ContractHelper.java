@@ -37,6 +37,7 @@ public class ContractHelper extends HelperBase{
         fillTextForm(By.name("email2"),contactData.getEmail2());
         fillTextForm(By.name("email3"),contactData.getEmail3());
         fillTextForm(By.name("homepage"),contactData.getHomepage());
+        attachFile(By.name("photo"),contactData.getPhoto());
         if (creation)
         {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -45,6 +46,7 @@ public class ContractHelper extends HelperBase{
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
+
 
     public void edit(ContactData contact) {
         editSelectedContractById(contact.getIdcontact());
