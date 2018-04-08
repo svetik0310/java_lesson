@@ -69,19 +69,18 @@ public class ContactDataGenerator {
     }
 
     private void saveFileCSV(List<ContactData> contacts, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for(ContactData contact: contacts)
-        {
-            writer.write(String.format("%s;%s\n",contact.getFirstname(),contact.getLastname()));
+        try(Writer writer = new FileWriter(file)) {
+            for (ContactData contact : contacts) {
+                writer.write(String.format("%s;%s\n", contact.getFirstname(), contact.getLastname()));
+            }
         }
-        writer.close();
     }
 
     private void saveFileJSON(List<ContactData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try(Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 }
