@@ -40,6 +40,8 @@ public class ContactData {
     private String allEmails;
     private String allAddress;
     private  File photo;
+    @Expose
+    private String group;
 
     public File getPhoto() {
         return photo;
@@ -69,10 +71,6 @@ public class ContactData {
         result = 31 * result + idcontact;
         return result;
     }
-
-    private String group;
-
-
 
     public ContactData withIdcontact(int idcontact) {
         this.idcontact = idcontact;

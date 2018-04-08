@@ -62,6 +62,7 @@ public class ContactDataGenerator {
                     .withEmail2(String.format("email2%s@mail.ru",i))
                     .withEmail3(String.format("email3%s@mail.ru",i))
                     .withHomepage(String.format("homepage%s.ru",i))
+                    .withGroup(String.format("groupname %s",i))
             );
         }
         return contacts;

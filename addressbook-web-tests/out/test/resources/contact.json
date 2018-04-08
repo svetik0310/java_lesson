@@ -14,8 +14,7 @@
     "email": "email0@mail.ru",
     "email2": "email20@mail.ru",
     "email3": "email30@mail.ru",
-    "homepage": "homepage0.ru",
-    "group": "groupname 0"
+    "homepage": "homepage0.ru"
   },
   {
     "firstname": "Firstname1",
@@ -32,8 +31,7 @@
     "email": "email1@mail.ru",
     "email2": "email21@mail.ru",
     "email3": "email31@mail.ru",
-    "homepage": "homepage1.ru",
-    "group": "groupname 1"
+    "homepage": "homepage1.ru"
   },
   {
     "firstname": "Firstname2",
@@ -50,8 +48,7 @@
     "email": "email2@mail.ru",
     "email2": "email22@mail.ru",
     "email3": "email32@mail.ru",
-    "homepage": "homepage2.ru",
-    "group": "groupname 2"
+    "homepage": "homepage2.ru"
   },
   {
     "firstname": "Firstname3",
@@ -68,8 +65,7 @@
     "email": "email3@mail.ru",
     "email2": "email23@mail.ru",
     "email3": "email33@mail.ru",
-    "homepage": "homepage3.ru",
-    "group": "groupname 3"
+    "homepage": "homepage3.ru"
   },
   {
     "firstname": "Firstname4",
@@ -86,7 +82,6 @@
     "email": "email4@mail.ru",
     "email2": "email24@mail.ru",
     "email3": "email34@mail.ru",
-    "homepage": "homepage4.ru",
-    "group": "groupname 4"
+    "homepage": "homepage4.ru"
   }
 ]
