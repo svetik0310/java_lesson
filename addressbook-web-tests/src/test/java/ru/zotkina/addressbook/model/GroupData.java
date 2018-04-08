@@ -1,8 +1,13 @@
 package ru.zotkina.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 public class GroupData {
+    @Expose
     private  String groupname;
+    @Expose
     private  String header;
+    @Expose
     private  String footer;
     private  int idgroup=Integer.MAX_VALUE;;
 

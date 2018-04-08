@@ -2,6 +2,8 @@ package ru.zotkina.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ru.zotkina.addressbook.model.ContactData;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,6 +19,9 @@ public class ContactDataGenerator {
     @Parameter(names="-f",description = "File name")
     public String file;
 
+    @Parameter(names="-d",description = "File format")
+    public String format;
+
     public static void main(String[] args) throws IOException {
         ContactDataGenerator generator = new ContactDataGenerator();
         JCommander jCommander = new JCommander(generator);
@@ -30,25 +35,52 @@ public class ContactDataGenerator {
 
     private void run() throws IOException {
         List<ContactData> contacts = getContacts(count);
-        saveToFile(contacts,new File(file));
+        if (format.equals("csv")) {
+            saveFileCSV(contacts, new File(file));
+        } else if (format.equals("json")) {
+            saveFileJSON(contacts, new File(file));
+        }else System.out.println("Unrecognized format"+format);
     }
 
     private List<ContactData> getContacts(int count) {
         List<ContactData> contacts=new ArrayList<ContactData>();
         for (int i=0;i<count;i++)
         {
-            contacts.add(new ContactData().withLastname(String.format("Lastname%s",i))
-                    .withFirstname(String.format("Firstname%s",i)));
+            contacts.add(new ContactData()
+                    .withFirstname(String.format("Firstname%s",i))
+                    .withMiddlename(String.format("Midlename%s",i))
+                    .withLastname(String.format("Lastname%s",i))
+                    .withNickname(String.format("Nickname%s",i))
+                    .withTitle(String.format("Title%s",i))
+                    .withCompany(String.format("Company%s",i))
+                    .withAddress(String.format("Address%s",i))
+                    .withHome(String.format("Home%s",i))
+                    .withMobile(String.format("Mobile%s",i))
+                    .withWork(String.format("Work%s",i))
+                    .withFax(String.format("Fax%s",i))
+                    .withEmail(String.format("email%s@mail.ru",i))
+                    .withEmail2(String.format("email2%s@mail.ru",i))
+                    .withEmail3(String.format("email3%s@mail.ru",i))
+                    .withHomepage(String.format("homepage%s.ru",i))
+            );
         }
         return contacts;
     }
 
-    private void saveToFile(List<ContactData> contacts, File file) throws IOException {
+    private void saveFileCSV(List<ContactData> contacts, File file) throws IOException {
         Writer writer = new FileWriter(file);
         for(ContactData contact: contacts)
         {
             writer.write(String.format("%s;%s\n",contact.getFirstname(),contact.getLastname()));
         }
+        writer.close();
+    }
+
+    private void saveFileJSON(List<ContactData> contacts, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(contacts);
+        Writer writer = new FileWriter(file);
+        writer.write(json);
         writer.close();
     }
 }
