@@ -39,6 +39,7 @@ public class ContactData {
     private String allPhones;
     private String allEmails;
     private String allAddress;
+    @Expose
     private  File photo;
     @Expose
     private String group;

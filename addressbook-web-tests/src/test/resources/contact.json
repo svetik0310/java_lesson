@@ -52,41 +52,5 @@
     "email3": "email32@mail.ru",
     "homepage": "homepage2.ru",
     "group": "groupname 2"
-  },
-  {
-    "firstname": "Firstname3",
-    "middlename": "Midlename3",
-    "lastname": "Lastname3",
-    "nickname": "Nickname3",
-    "title": "Title3",
-    "company": "Company3",
-    "address": "Address3",
-    "home": "Home3",
-    "mobile": "Mobile3",
-    "work": "Work3",
-    "fax": "Fax3",
-    "email": "email3@mail.ru",
-    "email2": "email23@mail.ru",
-    "email3": "email33@mail.ru",
-    "homepage": "homepage3.ru",
-    "group": "groupname 3"
-  },
-  {
-    "firstname": "Firstname4",
-    "middlename": "Midlename4",
-    "lastname": "Lastname4",
-    "nickname": "Nickname4",
-    "title": "Title4",
-    "company": "Company4",
-    "address": "Address4",
-    "home": "Home4",
-    "mobile": "Mobile4",
-    "work": "Work4",
-    "fax": "Fax4",
-    "email": "email4@mail.ru",
-    "email2": "email24@mail.ru",
-    "email3": "email34@mail.ru",
-    "homepage": "homepage4.ru",
-    "group": "groupname 4"
   }
 ]

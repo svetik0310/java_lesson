@@ -1,27 +1,50 @@
 package ru.zotkina.addressbook.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.zotkina.addressbook.model.ContactData;
 import ru.zotkina.addressbook.model.Contacts;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
-    @Test
-    public void testContactCreation() {
+
+    @DataProvider
+    public Iterator<Object[]> ValidContactsFromJson() throws IOException {
+        BufferedReader buffer=new BufferedReader(new FileReader(new File("src/test/resources/contact.json")));
+        String json="";
+        String line=buffer.readLine();
+        while (line!=null)
+        {
+            json+=line;
+            line=buffer.readLine();
+        }
+        Gson gson= new Gson();
+        List<ContactData> contacts= gson.fromJson(json,new TypeToken<List<ContactData>>(){}.getType());//List<GroupData>.class
+        return  contacts.stream().map((g)-> new Object[]{g}).collect(Collectors.toList()).iterator();
+    }
+
+
+
+
+
+    @Test (dataProvider = "ValidContactsFromJson")
+    public void testContactCreation(ContactData contact) {
         app.goTo().homePage();
         Contacts before=app.contract().all();
         File photo=new File("src/test/resources/testPhoto.jpg");
-        ContactData contact =new ContactData().withFirstname("Вася").withMiddlename("Иванович").withLastname("Пупкин")
-                .withNickname("Vasya").withTitle("title").withCompany("company")
-                .withAddress("address").withHome("222").withMobile("333")
-                .withWork("444").withFax("555").withEmail3("3445")
-                .withEmail("432434").withEmail2("2423424")
-                .withHomepage("343543545").withGroup("1")
-                .withPhoto(photo);
+        contact.withPhoto(photo);
         app.contract().create(contact);
         app.goTo().returnToHomePage();
         assertThat(app.contract().count(),equalTo(before.size()+1));
