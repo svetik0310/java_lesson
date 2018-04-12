@@ -20,8 +20,6 @@ package ru.zotkina.addressbook.tests;
 
 public class GroupCreationTests extends TestBase {
 
-    Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
-
     @DataProvider
     public Iterator<Object[]> ValidGroupsFromJson() throws IOException {
        try(BufferedReader buffer=new BufferedReader(new FileReader(new File("src/test/resources/groups.json")))) {
@@ -52,7 +50,6 @@ public class GroupCreationTests extends TestBase {
 
     @Test
     public void testBadGroupCreation() {
-        logger.info("Start test testBadGroupCreation");
         app.goTo().groupPage();
         Groups before = app.group().all();
         GroupData group=new GroupData().withGroupname("1'").withFooter("2").withHeader("3");
@@ -61,7 +58,6 @@ public class GroupCreationTests extends TestBase {
         Groups after = app.group().all();
 
         assertThat(after,equalTo(before));
-        logger.info("Stop test testBadGroupCreation");
     }
 
 }
