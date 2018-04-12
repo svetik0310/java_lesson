@@ -12,6 +12,8 @@ dependencies{
     compile 'com.beust:jcommander:1.72'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'mysql:mysql-connector-java:8.0.9-rc'
+
 }
 
 task testGroups(type: Test){
