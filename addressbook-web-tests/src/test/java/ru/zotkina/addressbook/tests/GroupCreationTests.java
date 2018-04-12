@@ -2,6 +2,8 @@ package ru.zotkina.addressbook.tests;
 
         import com.google.gson.Gson;
         import com.google.gson.reflect.TypeToken;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
         import org.testng.annotations.DataProvider;
         import org.testng.annotations.Test;
         import ru.zotkina.addressbook.model.GroupData;
@@ -17,6 +19,8 @@ package ru.zotkina.addressbook.tests;
 
 
 public class GroupCreationTests extends TestBase {
+
+    Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
 
     @DataProvider
     public Iterator<Object[]> ValidGroupsFromJson() throws IOException {
@@ -48,6 +52,7 @@ public class GroupCreationTests extends TestBase {
 
     @Test
     public void testBadGroupCreation() {
+        logger.info("Start test testBadGroupCreation");
         app.goTo().groupPage();
         Groups before = app.group().all();
         GroupData group=new GroupData().withGroupname("1'").withFooter("2").withHeader("3");
@@ -56,6 +61,7 @@ public class GroupCreationTests extends TestBase {
         Groups after = app.group().all();
 
         assertThat(after,equalTo(before));
+        logger.info("Stop test testBadGroupCreation");
     }
 
 }
