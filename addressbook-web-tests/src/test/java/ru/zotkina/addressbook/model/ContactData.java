@@ -1,55 +1,92 @@
 package ru.zotkina.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
+
+@Entity
+@Table(name="addressbook")
 public class ContactData {
     @Expose
+    @Column(name="firstname")
     private  String firstname;
     @Expose
+    @Column(name="middlename")
     private String middlename;
     @Expose
+    @Column(name="lastname")
     private  String lastname;
     @Expose
+    @Column(name="nickname")
     private  String nickname;
     @Expose
+    @Column(name="title")
     private  String title;
     @Expose
+    @Column(name="company")
     private  String company;
     @Expose
+    @Type(type ="text")
+    @Column(name="address")
     private  String address;
     @Expose
+    @Column(name="home")
+    @Type(type ="text")
     private  String home;
     @Expose
+    @Column(name="mobile")
+    @Type(type ="text")
     private  String mobile;
     @Expose
+    @Column(name="work")
+    @Type(type ="text")
     private  String work;
     @Expose
+    @Column(name="fax")
+    @Type(type ="text")
     private  String fax;
     @Expose
+    @Column(name="email")
+    @Type(type ="text")
     private  String email;
     @Expose
+    @Column(name="email2")
+    @Type(type ="text")
     private  String email2;
     @Expose
+    @Column(name="email3")
+    @Type(type ="text")
     private  String email3;
     @Expose
+    @Column(name="homepage")
+    @Type(type ="text")
     private  String homepage;
+    @Id
+    @Column(name="id")
     private int  idcontact=Integer.MAX_VALUE;
+    @Transient
     private String allPhones;
+    @Transient
     private String allEmails;
+    @Transient
     private String allAddress;
     @Expose
-    private  File photo;
+    @Column(name="photo")
+    @Type(type ="text")
+    private  String photo;
     @Expose
+    @Transient
     private String group;
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
