@@ -31,11 +31,11 @@ public class ContractEditTests extends TestBase{
     }
     @Test
     public void testContactUpdate() {
-        Contacts before=app.contract().all();
+        Contacts before=app.db().contacts();//app.contract().all();
         ContactData editContact=before.iterator().next();
         File photo=new File("src/test/resources/testPhoto.jpg");
         ContactData contact = new ContactData().withIdcontact(editContact.getIdcontact())
-                .withFirstname("Василий2").withMiddlename("Иванович").withLastname("Пупкин")
+                .withFirstname("Василий500").withMiddlename("Иванович").withLastname("Пупкин")
                 .withNickname("Vasya").withTitle("title").withCompany("company")
                 .withAddress("address").withEmail("222").withEmail2("333")
                 .withEmail3("444").withFax("555").withHomepage("3445")
@@ -44,7 +44,7 @@ public class ContractEditTests extends TestBase{
         app.contract().edit(contact);
         app.goTo().returnToHomePage();
         assertThat(app.contract().count(),equalTo(before.size()));
-        Contacts after = app.contract().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after,equalTo(before.withOut(editContact).withAdded(contact)));
 

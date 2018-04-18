@@ -30,12 +30,12 @@ public class ContractDeleteTests extends TestBase{
 
     @Test
     public void testContactDelete() {
-        Contacts before=app.contract().all();
+        Contacts before=app.db().contacts();//app.contract().all();
         ContactData deleteContact=before.iterator().next();
         app.contract().delete(deleteContact);
         app.goTo().homePage();
         assertThat(app.contract().count(),equalTo(before.size()-1));
-        Contacts after=app.contract().all();
+        Contacts after=app.db().contacts();//app.contract().all();
 
         assertThat(after,equalTo(before.withOut(deleteContact)));
     }
