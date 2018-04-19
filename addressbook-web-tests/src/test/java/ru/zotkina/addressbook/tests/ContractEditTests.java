@@ -47,6 +47,9 @@ public class ContractEditTests extends TestBase{
         Contacts after = app.db().contacts();
 
         assertThat(after,equalTo(before.withOut(editContact).withAdded(contact)));
-
+        verifyContactListInUi();
     }
+
+    //-DverifyUi=true
+
 }

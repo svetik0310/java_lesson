@@ -38,6 +38,7 @@ public class ContractDeleteTests extends TestBase{
         Contacts after=app.db().contacts();//app.contract().all();
 
         assertThat(after,equalTo(before.withOut(deleteContact)));
+        verifyContactListInUi();
     }
 
 }
