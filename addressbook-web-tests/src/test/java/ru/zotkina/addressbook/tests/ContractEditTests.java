@@ -25,7 +25,9 @@ public class ContractEditTests extends TestBase{
             app.contract().create(new ContactData().withFirstname("Василий").withMiddlename("Иванович").withLastname("Пупкин")
                     .withNickname("Vasya").withTitle( "title")
                     .withCompany("company").withAddress("address").withEmail("222").withEmail2("333").withEmail3("444").withFax("555")
-                    .withHomepage("3445").withHome("432434").withMobile("2423424").withWork("343543545").withGroup("test1A"), false);
+                    .withHomepage("3445").withHome("432434").withMobile("2423424").withWork("343543545")
+                    //.withGroup("test1A")
+                    , false);
             app.goTo().returnToHomePage();
         }
     }

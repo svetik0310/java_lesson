@@ -26,7 +26,9 @@ public class ContactPhoneTests extends TestBase{
                     .withNickname("Vasya").withTitle("title").withCompany("company")
                     .withAddress("address").withEmail("222").withEmail2("333").withEmail3("444")
                     .withFax("555").withWork("3445").withHomepage("432434").withHome("2423424")
-                    .withMobile("343543545").withGroup("test1A"), false);
+                    .withMobile("343543545")
+                    //.withGroup("test1A")
+                    , false);
             app.goTo().returnToHomePage();
         }
     }
