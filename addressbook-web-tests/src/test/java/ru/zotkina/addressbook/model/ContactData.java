@@ -80,6 +80,12 @@ public class ContactData {
     @Type(type ="text")
     private  String photo;
 
+    public ContactData withGroups(Set<GroupData> groups)
+                                   {
+        this.groups = groups;
+        return this;
+    }
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="address_in_groups", joinColumns = @JoinColumn(name="id"),
             inverseJoinColumns =@JoinColumn(name="group_id") )

@@ -17,12 +17,12 @@ public class ContractEditTests extends TestBase{
     @BeforeMethod
     public void preconditions(){
         app.goTo().homePage();
-        if(app.contract().all().size()==0) {
+        if(app.contact().all().size()==0) {
             app.goTo().groupPage();
             if(app.group().all().size()==0) {
                 app.group().create(new GroupData().withGroupname("test1A").withHeader("test2A").withFooter("test3A"));
             }
-            app.contract().create(new ContactData().withFirstname("Василий").withMiddlename("Иванович").withLastname("Пупкин")
+            app.contact().create(new ContactData().withFirstname("Василий").withMiddlename("Иванович").withLastname("Пупкин")
                     .withNickname("Vasya").withTitle( "title")
                     .withCompany("company").withAddress("address").withEmail("222").withEmail2("333").withEmail3("444").withFax("555")
                     .withHomepage("3445").withHome("432434").withMobile("2423424").withWork("343543545")
@@ -33,7 +33,7 @@ public class ContractEditTests extends TestBase{
     }
     @Test
     public void testContactUpdate() {
-        Contacts before=app.db().contacts();//app.contract().all();
+        Contacts before=app.db().contacts();//app.contact().all();
         ContactData editContact=before.iterator().next();
         File photo=new File("src/test/resources/testPhoto.jpg");
         ContactData contact = new ContactData().withIdcontact(editContact.getIdcontact())
@@ -43,9 +43,9 @@ public class ContractEditTests extends TestBase{
                 .withEmail3("444").withFax("555").withHomepage("3445")
                 .withHome("432434").withWork("2423424").withMobile("343543545").withPhoto(photo);
 
-        app.contract().edit(contact);
+        app.contact().edit(contact);
         app.goTo().returnToHomePage();
-        assertThat(app.contract().count(),equalTo(before.size()));
+        assertThat(app.contact().count(),equalTo(before.size()));
         Contacts after = app.db().contacts();
 
         assertThat(after,equalTo(before.withOut(editContact).withAdded(contact)));

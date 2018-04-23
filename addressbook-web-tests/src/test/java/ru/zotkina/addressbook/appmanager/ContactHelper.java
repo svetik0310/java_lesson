@@ -8,12 +8,13 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.zotkina.addressbook.model.ContactData;
 import ru.zotkina.addressbook.model.Contacts;
+import ru.zotkina.addressbook.model.GroupData;
 
 import java.util.*;
 
-public class ContractHelper extends HelperBase{
+public class ContactHelper extends HelperBase{
 
-    public ContractHelper(WebDriver wd) {
+    public ContactHelper(WebDriver wd) {
         super(wd);
     }
 
@@ -57,6 +58,31 @@ public class ContractHelper extends HelperBase{
         fillContractForm(contact, false);
         contractCash=null;
         submitContractUpdate();
+    }
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getIdcontact());
+        WebElement select = wd.findElement(By.name("to_group"));
+        Select selectall=new Select(select);
+        selectall.selectByValue(Integer.toString(group.getIdgroup()));
+        wd.findElement(By.name("add")).click();
+        contractCash=null;
+    }
+
+    public void removeFromGroup(ContactData contact, GroupData group) {
+        selectGroupByName(group.getIdgroup());
+
+        selectContactById(contact.getIdcontact());
+        wd.findElement(By.name("remove")).click();
+        contractCash=null;
+    }
+
+    private void selectGroupByName(int id) {
+        WebElement select = wd.findElement(By.name("group"));
+        Select selectall=new Select(select);
+        selectall.selectByValue(Integer.toString(id));
+        String s=wd.findElement(By.name("remove")).getAttribute("value");
+        s.equals("Remove from "+"groupname 5");
     }
 
     private void editSelectedContractById(int idcontact) {
@@ -137,8 +163,8 @@ public class ContractHelper extends HelperBase{
             WebElement elementsTd1= element.findElement(By.xpath("./td[3]"));
             String firstname= elementsTd1.getText();
 
-            ContactData contract = new ContactData().withIdcontact(id).withFirstname(firstname).withLastname(lastname);
-            contractCash.add(contract);*/
+            ContactData contact = new ContactData().withIdcontact(id).withFirstname(firstname).withLastname(lastname);
+            contractCash.add(contact);*/
            List<WebElement> cells = element.findElements(By.tagName("td"));
            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
            String lastname=cells.get(1).getText();
