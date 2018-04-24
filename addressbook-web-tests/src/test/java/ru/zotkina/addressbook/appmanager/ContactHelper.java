@@ -82,7 +82,6 @@ public class ContactHelper extends HelperBase{
         Select selectall=new Select(select);
         selectall.selectByValue(Integer.toString(id));
         String s=wd.findElement(By.name("remove")).getAttribute("value");
-        s.equals("Remove from "+"groupname 5");
     }
 
     private void editSelectedContractById(int idcontact) {
