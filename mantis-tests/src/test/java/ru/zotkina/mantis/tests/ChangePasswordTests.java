@@ -22,18 +22,17 @@ public class ChangePasswordTests extends TestBase{
     @Test
     public void testChangePassword() throws IOException {
         Long now=System.currentTimeMillis();
-        String email = String.format("user%s@localhost.localdomain",now);
+        String email = String.format("user%s@localhost",now);
         String username = "user"+now;
         String password = "000";
         app.login().login("administrator","root");
 
         UserData userChange=new UserData().withId(Integer.parseInt("2")).withUsername("user1");
-         app.registration().changePass(userChange);
-            List<MailMessage> mailM = app.mail().waitForMail(2, 10000);
-            String confirmLink = findConfirmationLink(mailM, email);
+            app.registration().changePass(userChange);
+            List<MailMessage> mailM = app.mail().waitForMail(1, 10000);
+            String confirmLink = findConfirmationLink(mailM, "user1@localhost");
             app.registration().finish(confirmLink, password);
             assertTrue(app.newSession().login(userChange.getUsername(), "000"));
-
     }
 
         private String findConfirmationLink(List<MailMessage> mailM, String email)

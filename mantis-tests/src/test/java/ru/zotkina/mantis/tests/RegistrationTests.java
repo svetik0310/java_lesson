@@ -22,7 +22,7 @@ public class RegistrationTests extends TestBase{
     @Test
     public void testRegistration() throws IOException {
         Long now=System.currentTimeMillis();
-        String email = String.format("user%s@localhost.localdomain",now);
+        String email = String.format("user%s@localhost",now);
         String username = "user"+now;
         app.registration().start(username, email);
         List<MailMessage> mailM=app.mail().waitForMail(2,10000);
