@@ -9,6 +9,7 @@ import ru.zotkina.mantis.model.UserData;
 import ru.zotkina.mantis.model.Users;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -21,18 +22,17 @@ public class ChangePasswordTests extends TestBase{
 
     @Test
     public void testChangePassword() throws IOException {
-        Long now=System.currentTimeMillis();
-        String email = String.format("user%s@localhost",now);
-        String username = "user"+now;
         String password = "000";
+        Users u = app.db().users();
+        u.removeIf(userData -> userData.getUsername().equals("administrator"));
+        UserData change= u.iterator().next();
         app.login().login("administrator","root");
 
-        UserData userChange=new UserData().withId(Integer.parseInt("2")).withUsername("user1");
-            app.registration().changePass(userChange);
+        app.registration().changePass(change);
             List<MailMessage> mailM = app.mail().waitForMail(1, 10000);
-            String confirmLink = findConfirmationLink(mailM, "user1@localhost");
+            String confirmLink = findConfirmationLink(mailM, change.getEmail());
             app.registration().finish(confirmLink, password);
-            assertTrue(app.newSession().login(userChange.getUsername(), "000"));
+            assertTrue(app.newSession().login(change.getUsername(), password));
     }
 
         private String findConfirmationLink(List<MailMessage> mailM, String email)
@@ -41,6 +41,8 @@ public class ChangePasswordTests extends TestBase{
         VerbalExpression v= VerbalExpression.regex().find("http").nonSpace().oneOrMore().build();
         return v.getText(mail.text);
     }
+
+
 
     @AfterMethod(alwaysRun = true)
     public void stopMailServer()

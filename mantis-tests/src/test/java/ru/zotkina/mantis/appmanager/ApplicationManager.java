@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.MatchResult;
+
 
 public class ApplicationManager {
     private WebDriver wd;
@@ -33,6 +33,7 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target","local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties",target))));
+        dbHelper=new DbHelper();
     }
 
 

@@ -19,9 +19,12 @@ public class UserData {
     @Expose
     @Column(name="password")
     private String password;
+    @Expose
+    @Column(name="email")
+    private String email;
 
     @Expose
-    @Column(name="id")
+    @Id
     private int id;
 
 
@@ -36,6 +39,11 @@ public class UserData {
         this.id= id;
         return this;
     }
+    public UserData withEmail(String email)
+    {
+        this.email= email;
+        return this;
+    }
 
     public UserData withPassword(String pass) {
         this.password = pass;
@@ -48,6 +56,19 @@ public class UserData {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getId() {

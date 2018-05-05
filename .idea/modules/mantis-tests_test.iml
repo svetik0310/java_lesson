@@ -17,6 +17,7 @@
     <orderEntry type="library" name="Gradle: org.subethamail:subethasmtp:3.1.7" level="project" />
     <orderEntry type="library" name="Gradle: ru.lanwen.verbalregex:java-verbal-expressions:1.5" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.2.3" level="project" />
+    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:8.0.9-rc" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.3.0.CR1" level="project" />
     <orderEntry type="library" name="Gradle: com.beust:jcommander:1.72" level="project" />
     <orderEntry type="library" name="Gradle: org.apache-extras.beanshell:bsh:2.0b6" level="project" />
