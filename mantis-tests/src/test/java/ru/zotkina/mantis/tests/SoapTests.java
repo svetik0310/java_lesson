@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.zotkina.mantis.model.Issue;
 import ru.zotkina.mantis.model.Project;
 
+import javax.annotation.CheckReturnValue;
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,5 +30,6 @@ public class SoapTests extends TestBase{
         Issue create=app.soap().addIssue(issue);
         Assert.assertEquals(issue.getSummery(),create.getSummery());
     }
+
 
 }
