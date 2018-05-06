@@ -26,7 +26,7 @@ public class SoapTests extends TestBase{
     {
         Set<Project> projects=app.soap().getProjects();
         Issue issue= new Issue().withSummery("s").withDescription("d").withProject(projects.iterator().next());
-        Issue create=app.soap().addIssue();
+        Issue create=app.soap().addIssue(issue);
         Assert.assertEquals(issue.getSummery(),create.getSummery());
     }
 

@@ -1,12 +1,11 @@
 package ru.zotkina.mantis.appmanager;
 
-import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
-import biz.futureware.mantis.rpc.soap.client.ProjectData;
+import biz.futureware.mantis.rpc.soap.client.*;
 import ru.zotkina.mantis.model.Issue;
 import ru.zotkina.mantis.model.Project;
 
 import javax.xml.rpc.ServiceException;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -22,14 +21,30 @@ public class SoapHelper {
     }
 
     public Set<Project> getProjects() throws RemoteException, MalformedURLException, ServiceException {
-        MantisConnectPortType msPort = new MantisConnectLocator()
-                .getMantisConnectPort(new URL("http://localhost/mantisbt-1.2.19/api/soap/mantisconnect.php"));
+        MantisConnectPortType msPort = getMantisConnectPortType();
         ProjectData[] projects=msPort.mc_projects_get_user_accessible("administrator","root");
         return Arrays.asList(projects).stream()
                 .map((p)->new Project().withId(p.getId().intValue()).withName(p.getName())).collect(Collectors.toSet());
     }
 
-    public Issue addIssue() {
-        return null;
+    private MantisConnectPortType getMantisConnectPortType() throws ServiceException, MalformedURLException {
+        return new MantisConnectLocator()
+                    .getMantisConnectPort(new URL(app.getProperty("mantis.url")));//"http://localhost/mantisbt-1.2.19/api/soap/mantisconnect.php"));
+    }
+
+    public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
+        MantisConnectPortType msPort = getMantisConnectPortType();
+        String categories[]=msPort.mc_project_get_categories("administrator","root",BigInteger.valueOf(issue.getProject().getId()));
+        IssueData idata = new IssueData();
+        idata.setSummary(issue.getSummery());
+        idata.setDescription(issue.getDescription());
+        idata.setCategory(categories[0]);
+        idata.setProject(new ObjectRef(BigInteger.valueOf(issue.getProject().getId()),issue.getProject().getName()));
+        BigInteger id=msPort.mc_issue_add("administrator","root",idata);
+        IssueData created=msPort.mc_issue_get("administrator","root",id);
+        return new Issue().withId(created.getId().intValue())
+                .withDescription(created.getDescription())
+                .withSummery(created.getSummary())
+                .withProject(new Project().withId(created.getId().intValue()).withName(created.getProject().getName()));
     }
 }
