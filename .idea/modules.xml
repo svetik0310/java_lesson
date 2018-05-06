@@ -11,6 +11,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" group="mantis-tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" group="mantis-tests" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap.iml" filepath="$PROJECT_DIR$/.idea/modules/soap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap_main.iml" filepath="$PROJECT_DIR$/.idea/modules/soap_main.iml" group="soap" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap_test.iml" filepath="$PROJECT_DIR$/.idea/modules/soap_test.iml" group="soap" />
     </modules>
   </component>
 </project>

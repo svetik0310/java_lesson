@@ -21,7 +21,7 @@ public class DbHelper {
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
         sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-       /* Connection conn = null;
+        Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bugtracker?user=root&password="+ "&serverTimezone=UTC");
             Statement st=conn.createStatement();
@@ -41,7 +41,7 @@ public class DbHelper {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-    }*/
+    }
 
     }
 

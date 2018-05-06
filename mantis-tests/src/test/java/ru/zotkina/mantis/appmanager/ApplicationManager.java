@@ -23,6 +23,7 @@ public class ApplicationManager {
     private MailHelper mailHelper;
     private LoginHelper loginHelper;
     private DbHelper dbHelper;
+    private SoapHelper soapHelper;
 
     public ApplicationManager(String browser) {
 
@@ -34,6 +35,7 @@ public class ApplicationManager {
         String target = System.getProperty("target","local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties",target))));
         dbHelper=new DbHelper();
+        soapHelper=new SoapHelper(this);
     }
 
 
@@ -101,5 +103,11 @@ public class ApplicationManager {
 
     public DbHelper db() {
         return dbHelper;
+    }
+
+    public SoapHelper soap() {
+        if(soapHelper==null)
+        {soapHelper=new SoapHelper(this);}
+        return soapHelper;
     }
 }
