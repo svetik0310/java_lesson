@@ -26,9 +26,9 @@ public class SoapTests extends TestBase{
     public void testCreateIssue()throws MalformedURLException, ServiceException, RemoteException
     {
         Set<Project> projects=app.soap().getProjects();
-        Issue issue= new Issue().withSummery("s").withDescription("d").withProject(projects.iterator().next());
+        Issue issue= new Issue().withSummary("s").withDescription("d").withProject(projects.iterator().next());
         Issue create=app.soap().addIssue(issue);
-        Assert.assertEquals(issue.getSummery(),create.getSummery());
+        Assert.assertEquals(issue.getSummary(),create.getSummary());
     }
 
 

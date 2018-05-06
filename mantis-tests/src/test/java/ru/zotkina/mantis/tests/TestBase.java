@@ -45,11 +45,11 @@ public class TestBase {
     public boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException {
         MantisConnectPortType mc1 = getMantisConnectPortType();
         IssueData i = mc1.mc_issue_get("administrator","root",BigInteger.valueOf(issueId));
-        return i.getResolution().getName().equals("open");
+        return (i.getResolution().getName().equals("new")||i.getResolution().getName().equals("open"));
     }
 
     public void skipIfNotFixed(int issueId) throws RemoteException, ServiceException, MalformedURLException {
-        if (isIssueOpen(issueId)) {
+        if (!isIssueOpen(issueId)) {
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }

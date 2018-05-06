@@ -36,7 +36,7 @@ public class SoapHelper {
         MantisConnectPortType msPort = getMantisConnectPortType();
         String categories[]=msPort.mc_project_get_categories("administrator","root",BigInteger.valueOf(issue.getProject().getId()));
         IssueData idata = new IssueData();
-        idata.setSummary(issue.getSummery());
+        idata.setSummary(issue.getSummary());
         idata.setDescription(issue.getDescription());
         idata.setCategory(categories[0]);
         idata.setProject(new ObjectRef(BigInteger.valueOf(issue.getProject().getId()),issue.getProject().getName()));
@@ -44,7 +44,7 @@ public class SoapHelper {
         IssueData created=msPort.mc_issue_get("administrator","root",id);
         return new Issue().withId(created.getId().intValue())
                 .withDescription(created.getDescription())
-                .withSummery(created.getSummary())
+                .withSummary(created.getSummary())
                 .withProject(new Project().withId(created.getId().intValue()).withName(created.getProject().getName()));
     }
 
@@ -52,7 +52,7 @@ public class SoapHelper {
         MantisConnectPortType msPort = getMantisConnectPortType();
         IssueData data = msPort.mc_issue_get("administrator","root",BigInteger.valueOf(id));
         return new Issue().withProject(new Project().withName(data.getProject().getName()).withId(data.getId().intValue()))
-                .withSummery(data.getSummary()).withDescription(data.getDescription()).withId(data.getId().intValue());
+                .withSummary(data.getSummary()).withDescription(data.getDescription()).withId(data.getId().intValue());
     }
 
 }
