@@ -1,9 +1,20 @@
-package ru.zotkina.rest;
+package ru.zotkina.rest.model;
 
 public class Issue {
     private int id;
     private String subject;
     private String description;
+
+    public String getState() {
+        return state;
+    }
+
+    public Issue withState(String state) {
+        this.state = state;
+        return this;
+    }
+
+    private String state;
 
     public int getId() {
         return id;
