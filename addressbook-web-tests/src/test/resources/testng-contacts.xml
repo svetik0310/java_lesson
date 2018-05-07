@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+
+    <test name="Contacts">
+        <classes>
+            <class name="ru.zotkina.addressbook.tests.ContactCreationTests"/>
+            <class name="ru.zotkina.addressbook.tests.GroupEditTests"/>
+            <class name="ru.zotkina.addressbook.tests.ContactAddressTests"/>
+            <class name="ru.zotkina.addressbook.tests.ContactEmailTests"/>
+            <class name="ru.zotkina.addressbook.tests.ContactPhoneTests"/>
+            <class name="ru.zotkina.addressbook.tests.ContractDeleteTests"/>
+        </classes>
+    </test>
+</suite>
