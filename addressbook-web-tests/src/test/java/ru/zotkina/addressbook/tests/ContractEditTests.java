@@ -22,7 +22,8 @@ public class ContractEditTests extends TestBase{
             if(app.group().all().size()==0) {
                 app.group().create(new GroupData().withGroupname("test1A").withHeader("test2A").withFooter("test3A"));
             }
-            app.contact().create(new ContactData().withFirstname("Василий").withMiddlename("Иванович").withLastname("Пупкин")
+            app.contact().create(new ContactData().withFirstname("Vasya")
+                            .withMiddlename("Ivanov").withLastname("Pupkin")
                     .withNickname("Vasya").withTitle( "title")
                     .withCompany("company").withAddress("address").withEmail("222").withEmail2("333").withEmail3("444").withFax("555")
                     .withHomepage("3445").withHome("432434").withMobile("2423424").withWork("343543545")
@@ -37,7 +38,7 @@ public class ContractEditTests extends TestBase{
         ContactData editContact=before.iterator().next();
         File photo=new File("src/test/resources/testPhoto.jpg");
         ContactData contact = new ContactData().withIdcontact(editContact.getIdcontact())
-                .withFirstname("Василий500").withMiddlename("Иванович").withLastname("Пупкин")
+                .withFirstname("Vasya500").withMiddlename("Ivanov").withLastname("Pupkin")
                 .withNickname("Vasya").withTitle("title").withCompany("company")
                 .withAddress("address").withEmail("222").withEmail2("333")
                 .withEmail3("444").withFax("555").withHomepage("3445")

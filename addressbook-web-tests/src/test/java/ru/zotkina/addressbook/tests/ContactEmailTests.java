@@ -19,8 +19,8 @@ public class ContactEmailTests extends TestBase{
             if(app.group().all().size()==0) {
                 app.group().create(new GroupData().withGroupname("test1A").withHeader("test2A").withFooter("test3A"));
             }
-            app.contact().create(new ContactData().withFirstname("Василий")
-                    .withMiddlename("Иванович").withLastname("Пупкин")
+            app.contact().create(new ContactData().withFirstname("Vasya")
+                            .withMiddlename("Ivanov").withLastname("Pupkin")
                     .withNickname("Vasya").withTitle("title").withCompany("company")
                     .withAddress("address").withEmail("222").withEmail2("333").withEmail3("444")
                     .withFax("555").withWork("3445").withHomepage("432434").withHome("2423424")

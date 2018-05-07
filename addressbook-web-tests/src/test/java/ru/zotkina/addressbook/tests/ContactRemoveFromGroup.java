@@ -28,8 +28,8 @@ public class ContactRemoveFromGroup extends TestBase {
        Groups beforeGr=app.db().groups();
         app.goTo().homePage();
         if(app.contact().all().size()==0) {
-            app.contact().create(new ContactData().withFirstname("Василий")
-                    .withMiddlename("Иванович").withLastname("Пупкин")
+            app.contact().create(new ContactData().withFirstname("Vasya")
+                    .withMiddlename("Ivanov").withLastname("Pupkin")
                     .withNickname("Vasya").withTitle("title").withCompany("company")
                     .withAddress("address").withEmail("222").withEmail2("333").withEmail3("444")
                     .withFax("555").withWork("3445").withHomepage("432434").withHome("2423424")
