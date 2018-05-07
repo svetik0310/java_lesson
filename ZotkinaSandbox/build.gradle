@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName = "ru.zotkina.homework.DistanceTests"
+mainClassName = "ru.zotkina.homework.ZotkinaFirst"
 
 repositories{
     mavenCentral()
