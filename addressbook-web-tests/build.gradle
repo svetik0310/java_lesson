@@ -1,5 +1,8 @@
 apply plugin: 'java'
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 repositories{
     mavenCentral()
@@ -14,6 +17,7 @@ dependencies{
     compile 'ch.qos.logback:logback-classic:1.2.3'
     compile 'mysql:mysql-connector-java:8.0.9-rc'
     compile 'org.hibernate:hibernate-core:5.3.0.CR1'
+	compileJava.options.encoding = 'UTF-8'
 }
 
 task testGroups(type: Test){
